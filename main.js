@@ -22,6 +22,7 @@ const semesterNames = ["Semestre","Semester","Termin","lukukausi","semestras","s
 //Fix #7 : added "Halbjahr" for Germans; well apparently #4 wasn't full support :c
 //Fix #8 : added "félév" for Hungarian; we're going interscholar 
 //Fix #11 : added "Term. 2" for Swedes
+//Fix #?: sem for dutch
 
 var subjects = [];
 var grades = [];
