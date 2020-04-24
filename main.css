@@ -1,0 +1,458 @@
+#file-input {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+    z-index: -1;
+}
+
+#file-input+ label {
+    font-size: 1.2em;
+    font-weight: 500;
+    color: whitesmoke;
+    background-color:red;
+    font-family: 'Exo 2', sans-serif;
+    display: inline-block;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+#file-input:focus + label,
+#file-input + label:hover {
+    background-color: rgb(126, 219, 219);    
+}
+
+#file-input + label {
+	cursor: pointer;
+}
+
+#main
+{
+    font-family: 'Exo 2', sans-serif;
+    font-size: 0.95em;
+}
+
+/*For phones*/
+#initialP
+{
+    font-size:1.04em;
+    text-align: center;
+    position: absolute;
+    top:28%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    
+}
+#subSelP
+{
+    text-align: center;
+}
+.taking{
+    text-align: center;
+    display: block;
+    margin-bottom: -20px;
+}
+#wT,#aT
+{
+    color: maroon;
+}
+#wT{
+    left:50%;
+}
+#oT,#bT
+{
+    color:lightskyblue;
+}
+
+#oSub label,
+#wSub label{
+    display: block;
+  padding-left: 15px;
+  text-indent: -15px;
+}
+#oSub input,
+#wSub input{
+    width: 20px;
+  height: 20px;
+  padding: 0;
+  margin:0;
+  vertical-align: bottom;
+  position: relative;
+  top: -1px;
+  *overflow: hidden;
+
+  -webkit-appearance:none;
+    background:white;
+    border-radius:4px;
+    border:2px solid #555;
+}
+#oSub input:checked,
+#wSub input:checked
+{
+    background: #abd;
+}
+.but
+{ /*button style from https://1stwebdesigner.com/free-code-snippets-css-buttons/ ; free to use */
+    display: inline-block;
+  *display: inline;
+  zoom: 1;
+  padding: 6px 20px;
+  margin: 0;
+  cursor: pointer;
+  border: 1px solid #bbb;
+  overflow: visible;
+  font: bold 13px arial, helvetica, sans-serif;
+  text-decoration: none;
+  white-space: nowrap;
+  color: #555;
+
+  -webkit-transition: background-color 0.2s ease-out;
+  -moz-transition: background-color 0.2s ease-out;
+  -ms-transition: background-color 0.2s ease-out;
+  -o-transition: background-color 0.2s ease-out;
+  transition: background-color 0.2s ease-out;
+  background-clip: padding-box; /* Fix bleeding */
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 2px 2px -1px rgba(0, 0, 0, 0.5),
+    0 1px 0 rgba(255, 255, 255, 0.3) inset;
+  -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3),
+    0 2px 2px -1px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.3) inset;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 2px 2px -1px rgba(0, 0, 0, 0.5),
+    0 1px 0 rgba(255, 255, 255, 0.3) inset;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(rgba(255, 255, 255, 0.3)),
+    to(rgba(255, 255, 255, 0))
+  );
+  background-image: -webkit-linear-gradient(
+    top,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0)
+  );
+  background-image: -moz-linear-gradient(
+    top,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0)
+  );
+  background-image: -ms-linear-gradient(
+    top,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0)
+  );
+  background-image: -o-linear-gradient(
+    top,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0)
+  );
+  background-image: linear-gradient(
+    top,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0)
+  );
+  background-color: #ca3535;
+  border-color: #c43c35;
+}
+.but:active
+{
+    background: #c43c35;
+}
+.but:hover{
+    background-color: #ee5f5b;
+}
+.but.blue{
+    background-color: #48d1cc;
+    border-color: #3f928f;
+    margin-top:10px;
+    padding-top:8px;
+    padding-bottom:8px;
+    min-width: 100%;
+}
+
+#divW,#divWS
+{
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+#o1{
+    display: inline-block;
+}
+#footer{
+    text-align: center;
+    position: absolute;
+    top:80%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+#subCT{
+    border: thin solid;
+    border-color: #c43c35;
+    padding : 3px;
+    margin:15px;
+}
+#wSub{
+    font-size:1.04em;
+    text-align: center;
+}
+#but{
+    min-width: 100%;
+}
+.bSub{
+    border-bottom : 1px solid;
+    border-color: #e68d20;
+}
+.gSub{
+    border-bottom : 1px solid;
+    border-color: lightgreen;
+}
+.imagePlus{
+    min-width: 16px;
+    min-height: 16px;
+    background-image: url(./img/plus-5-16.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+.imageDel{
+    min-width: 16px;
+    min-height: 16px;
+    background-image: url(./img/delete-16.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+#su{
+    min-width: 100%;
+}
+.inpDiv{
+    margin: 5px;
+}
+#aT,#bT
+{
+    text-align: center;
+    margin-left: 10px;
+}
+#mI_note{
+    border: 1px solid;
+    border-color: #c43c35;
+    align-self: center;
+    max-width: max-content;
+    text-align: center;
+}
+#aGrades,#bGrades{
+    align-items: center;
+    margin-left: 5%;
+}
+.inputG{
+    font-size: 1em;
+}
+@media only screen and (min-width: 450px) 
+{
+    #aGrades,#bGrades{
+        display:inline-block;
+    }
+    #aGrades{
+        margin-left: 6%;
+    }
+}
+@media only screen and (min-width: 600px) 
+{
+    #aGrades{
+        margin-left: 15%;
+    }
+}
+@media only screen and (min-width: 800px) 
+{
+    #aGrades{
+        margin-left: 25%;
+    }
+}
+@media only screen and (min-width: 1100px) 
+{
+    #aGrades{
+        margin-left: 32%;
+    }
+}
+@media only screen and (min-width:396px) and (min-height:470px)
+{#but{
+    text-align: center;
+    position: absolute;
+    bottom:10%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    min-width: 0;
+}}
+
+@media only screen and (min-width: 600px) /* For tablets and others */
+{
+    #initialP,
+    #subSelP,
+    #oT,
+    #wT,
+    #inputPage,
+    #checkS{
+        font-size: 1.01em;
+    }
+}
+
+@media only screen and (min-width: 800px) /* For tablets and others */
+{
+    #divW,#divWS{
+        float:left;
+        padding: 0;
+    }
+    #divO,#divOS{
+        float:right;
+        clear:right;
+    }
+    #wT,
+    #oT{
+        text-align: left;
+    }
+    #but
+    {
+        position: absolute;
+        bottom:10%;
+        left:50%;
+        transform: translate(-50%, -50%);
+        min-width:140px;
+        min-height: 30px;
+        font-size: 0.95em;
+    }
+    #subSelP{
+        padding-top:3%;
+        padding-bottom: 2%;
+    }
+    #checkS{
+        font-size: 1.1em;
+    }
+}
+
+
+@media only screen and (min-width: 1000px) and (min-height:735px) /* For PCs I guess */
+{
+    #initialP,
+    #subSelP,
+    #oT,
+    #wT,
+    #inputPage,
+    #checkS{
+        font-size: 1.4em;
+    }
+    #file-input+ label {
+        font-size: 1.6em;
+    }
+}
+@media only screen and (min-width: 1200px) and (min-height:657px)/* For PCs I guess */
+{
+#but{
+    bottom:30%;
+}
+}
+@media only screen and (min-width: 1200px) and (min-height:900px)/* For PCs I guess */
+{
+    #initialP,
+    #subSelP,
+    #oT,
+    #wT,
+    #inputPage{
+        font-size: 1.7em;
+    }
+    #file-input+ label {
+        font-size: 1.8em;
+    }
+    #but{
+        min-height: 40px;
+        min-width: 200px;
+        font-size: 1.1em;
+    }
+    #divW,#divOS,#divWS,
+    #divO{
+        display:inline-block;
+        position: absolute;
+    }
+    #divW,#divWS{
+        bottom:0%;
+        left:33%;
+        transform: translate(-50%, -50%);
+    }
+    #divO,#divOS{
+        bottom:0%;
+        left:73%;
+        transform: translate(-50%, -50%);
+    }
+    
+}
+@media only screen and (min-width: 900px) and (min-height:500px)
+{
+    #finalR{
+        position: absolute;
+        left:50%;
+        top:40%;
+        transform: translate(-50%,-50%);
+        font-size: 1.05em;
+    }
+    #finalR input{
+        font-size:0.75em;
+    }
+}
+@media only screen and (min-width: 900px) and (min-height:670px)
+{
+    #finalR{
+        position: absolute;
+        left:50%;
+        top:40%;
+        transform: translate(-50%,-50%);
+        font-size: 1.12em;
+    }
+    #finalR input{
+        font-size:0.8em;
+    }
+    .but.blue{
+        padding-bottom: 13px;
+        padding-top: 13px;
+    }
+}
+@media only screen and (min-height: 900px) and (min-width: 1000px)
+{
+    #finalR{
+        font-size: 1.3em;
+        position: absolute;
+        bottom:10%;
+        left:50%;
+        transform: translate(-50%, -50%);
+    }
+    #finalR input{
+        font-size: 0.8em;
+    }
+    #divOS,#divWS{
+        top:50%;
+    }
+    #checkS{
+        font-size: 1.3em;
+    }
+    #but{
+        bottom:40%;
+    }
+}
