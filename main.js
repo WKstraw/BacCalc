@@ -31,6 +31,8 @@ var averageA1 =0;
 var averageB1 =0;
 var gradeValues = [];
 var lastiD = 0;
+var aInpOrderedList = [];
+var bInpOrderedList = [];
 
 resetView();
 
@@ -53,7 +55,9 @@ function manInput()
 {
   let inH ="<div id=\"inputPage\"><p id=\"introT\">Please input your: </p>";
   inH += "<div id=\"aGrades\"><span class=\"inpGT\" id=\"aT\">A grades</span><div id=\"aInputs\">"+inputD(lastiD,false) +"</div></div>" + "<div id=\"bGrades\"><span class=\"inpGT\" id=\"bT\">B grades</span><div id=\"bInputs\">" + inputD(lastiD+1,false) +"</div></div>";
+  aInpOrderedList.push(lastiD);
   lastiD ++;
+  bInpOrderedList.push(lastiD);
   inH += "</br><p id=\"mI_note\">Do <b>NOT</b> include Ethics/Religion. If you have not been graded on a subject (i.e.:grade 'D'), don't write it.</p><div id=\"buttonsI\"><input class=\"but\" id=\"su\" type=\"submit\" value=\"Submit\"><input type=\"button\" id=\"return\" class=\"but blue\" value=\"Go back\"></div></div>";
   mainP.innerHTML = inH;
 
@@ -65,11 +69,12 @@ function manInput()
 }
 function inputD(id,del= true)
 {
-  return "<div class=\"inpDiv\"><input type=\"number\" id=\"inputGrade" + id +"\"  min=\"0.0\" max=\"10.0\" step=\"0.1\" value=\"\" class=\"inputG\">" + "<div class=\"imagePlus\"></div>" +(del ?  "<div class=\"imageDel\" id=\""+id+"\"></div>":"" ) + "</div>";
+  return "<div class=\"inpDiv\"><input type=\"number\" id=\"inputGrade" + (id<=9?("0"+id):id) +"\"  min=\"0.0\" max=\"10.0\" step=\"0.1\" value=\"\" class=\"inputG\">" + "<div class=\"imagePlus\" id=\"imPlus"+(id<=9?("0"+id):id)+"\"></div>" +(del ?  "<div class=\"imageDel\" id=\""+(id<=9? ("0"+id):id)+"\"></div>":"" ) + "</div>";
 }
 
 function sub()
 {
+  if(test) console.log("Submit: ");console.log(aInpOrderedList);console.log(bInpOrderedList);
   if(document.getElementsByClassName("inputG").length <=14)
   {
     alert("You have not inputted enough subjects");
@@ -77,41 +82,45 @@ function sub()
   }
   for(let i=0;i<document.getElementsByClassName("inputG").length;i++)
   {
-    
-    let val = document.getElementsByClassName("inputG")[i].value;
-    if(test) console.log(val);
+    let el = document.getElementsByClassName("inputG")[i];
+    let val = el.value;
+    if(val==10) val="10.0";
+    if(val==0) val="0.0";
+    let elId = el.getAttribute('id');
+    let idNums = parseInt(elId[elId.length-2]) *10 + parseInt(elId[elId.length-1]);
+    let typeOG ="";
+    let gradePlace =-1;
+    if(test)console.log(elId+ "     "+i);
+    for(let j = 0;j<aInpOrderedList.length;j++)
+    {
+      if(idNums == aInpOrderedList[j])
+      {
+        typeOG = "A";
+        gradePlace = j+1;
+        break;
+      }
+      if(idNums == bInpOrderedList[j])
+      {
+        typeOG = "B";
+        gradePlace = j+1;
+        break;
+      }
+      
+      console.log("No match:    /"+elId+"/       NUMS:"+idNums+":        A:"+aInpOrderedList[j]+":         B:"+bInpOrderedList[j]+":");
+    }
     val.replace(',','.');
-    if(test) console.log(val);
-    if(val.length>=5 || (val.length<3 && val!="")){
-      if(test)console.log("error");
-      alert("Wrong input on subject " + (i%2? (i-1):i) +"\'s "+(i%2? "B":"A")+" grade. Make sure you write the exact numbers as those writtten on your report");
+    if(val.length>=5 || (val.length<3 && val!="") || parseFloat(val)>10 || parseFloat(val)<0){
+      
+      alert("Wrong input on subject " + gradePlace +"\'s "+ typeOG +" grade. Make sure you write the exact numbers as those writtten on your report");
       return;
     }
     if(val =="")
     {
-      if(i%2==0)
-      {
-        if(document.getElementsByClassName("inputG")[i+1].value == "")
-        {//OK, skip
-          i++;
-          continue;
-        }
-        else{
-          if(test)console.log("error");
-          alert("Empty input on subject " + i%2? (i-1):i+"'s "+i%2? "B":"A"+" grade. Please complete it.");
-        }
-      }
-      else{
-        if(document.getElementsByClassName("inputG")[i-1].value == "")
-        {//OK, skip
-          continue;
-        }
-        else{
-          if(test)console.log("error");
-          alert("Empty input on subject " + i%2? (i-1):i+"'s "+i%2? "B":"A"+" grade. Please complete it.");
-        }
-      }
+      if(test)console.log("error 1  :" +i);
+      alert("Empty input on subject " + gradePlace +"'s "+ typeOG+" grade. Please complete it.");
+      return;
     }
+    
     grades.push(parseFloat(val)); 
     if(i==document.getElementsByClassName("inputG").length-1)
     {break;}
@@ -133,41 +142,49 @@ function addNew()
   let inpB = document.getElementById("bInputs");
   lastiD++;
   inpA.insertAdjacentHTML("beforeend", inputD(lastiD,true));
+  aInpOrderedList.push(lastiD);
+  document.getElementById("imPlus"+(lastiD<=9?("0"+lastiD):lastiD)).addEventListener("click",addNew);
+  document.getElementById((lastiD<=9?("0"+lastiD):lastiD)).addEventListener("click",function(e){del(e.target.getAttribute('id'));});
   lastiD++
   inpB.insertAdjacentHTML("beforeend", inputD(lastiD,true));
+  document.getElementById("imPlus"+(lastiD<=9?("0"+lastiD):lastiD)).addEventListener("click",addNew);
+  document.getElementById((lastiD<=9?("0"+lastiD):lastiD)).addEventListener("click",function(e){del(e.target.getAttribute('id'));});
+  bInpOrderedList.push(lastiD);
   if(test) console.log(document.getElementsByClassName("imagePlus").length);
-  updateEL();
+  if(test) console.log(aInpOrderedList);console.log(bInpOrderedList);
 } 
-
-function updateEL()
-{
-  for(let i=0;i<document.getElementsByClassName("imagePlus").length;i++)
-  {
-    document.getElementsByClassName("imagePlus")[i].removeEventListener("click",addNew);
-    document.getElementsByClassName("imagePlus")[i].addEventListener("click",addNew);
-  }
-  for(let i=0;i<document.getElementsByClassName("imageDel").length;i++)
-  {
-    var el = document.getElementsByClassName("imageDel")[i],
-    elClone = el.cloneNode(true);
-
-    el.parentNode.replaceChild(elClone, el);
-    document.getElementsByClassName("imageDel")[i].addEventListener("click",function(e){del(e.target.getAttribute('id'));});
-  }
-}
 function del(id){
   let idc = id;
   document.getElementById("inputGrade"+idc).parentElement.remove();
+  if(test) console.log("" +idc);
   if(idc%2==0)
   {
     idc++;
-    document.getElementById("inputGrade"+idc).parentElement.remove();
+    if(test) console.log("" +idc);
+    document.getElementById("inputGrade"+(idc<=9? ("0"+idc):idc)).parentElement.remove();
   }
   else{
     idc--;
-    document.getElementById("inputGrade"+idc).parentElement.remove();
+    if(test) console.log("" +idc);
+    document.getElementById("inputGrade"+(idc<=9? ("0"+idc):idc)).parentElement.remove();
   }
   if(test)console.log(document.getElementsByClassName("imagePlus").length);
+  if(test) console.log(aInpOrderedList);console.log(bInpOrderedList);
+  for(let i=0;i<aInpOrderedList.length;i++)
+  {
+    if(id == aInpOrderedList[i])
+    {
+      aInpOrderedList.splice(i,1);
+      bInpOrderedList.splice(i,1);
+      break;
+    } 
+    else if(id == bInpOrderedList[i])
+    {
+      bInpOrderedList.splice(i,1);
+      aInpOrderedList.splice(i,1);
+      break;
+    }
+  }
 }
 
 function correctRound(floatN){ //Losing in prescision, gaining in aestethics
